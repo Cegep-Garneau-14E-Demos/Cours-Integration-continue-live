@@ -23,7 +23,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Save_with_valid_data_calls_add_and_navigates_to_persons_view()
         {
-            var person = new Person { Id = 42 };
+            Person person = new Person { Id = 42 };
             _viewModel.ApplyNavigationParameters(person);
             _viewModel.Street = "Candy Lane";
             _viewModel.City = "North Pole";
@@ -46,13 +46,13 @@ namespace person_wpf_demo_tests
         [Test]
         public void Save_command_cannot_execute_when_required_fields_are_missing()
         {
-            var person = new Person { Id = 42 };
+            Person person = new Person { Id = 42 };
             _viewModel.ApplyNavigationParameters(person);
             _viewModel.Street = string.Empty;
             _viewModel.City = "North Pole";
             _viewModel.PostalCode = "H0H0H0";
 
-            var canExecute = _viewModel.SaveCommand.CanExecute(null);
+            bool canExecute = _viewModel.SaveCommand.CanExecute(null);
 
             Assert.That(canExecute, Is.False);
         }

@@ -26,7 +26,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Navigate_to_persons_command_calls_navigation_service()
         {
-            var viewModel = new MainViewModel(_navigationServiceMock.Object);
+            MainViewModel viewModel = new MainViewModel(_navigationServiceMock.Object);
 
             _navigationServiceMock.Reset();
             viewModel.NavigateToPersonsViewCommand.Execute(null);
@@ -37,7 +37,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Navigate_to_new_person_command_calls_navigation_service()
         {
-            var viewModel = new MainViewModel(_navigationServiceMock.Object);
+            MainViewModel viewModel = new MainViewModel(_navigationServiceMock.Object);
 
             _navigationServiceMock.Reset();
             viewModel.NavigateToNewPersonViewCommand.Execute(null);

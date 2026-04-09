@@ -12,13 +12,13 @@ namespace person_wpf_demo_tests
         [Test]
         public void Navigate_to_sets_current_view_with_view_model_from_factory()
         {
-            var expectedViewModel = new TestViewModel();
-            var factoryMock = new Mock<Func<Type, BaseViewModel>>();
+            TestViewModel expectedViewModel = new TestViewModel();
+            Mock<Func<Type, BaseViewModel>> factoryMock = new Mock<Func<Type, BaseViewModel>>();
             factoryMock
                 .Setup(factory => factory.Invoke(typeof(TestViewModel)))
                 .Returns(expectedViewModel);
 
-            var navigationService = new NavigationService(factoryMock.Object);
+            NavigationService navigationService = new NavigationService(factoryMock.Object);
 
             navigationService.NavigateTo<TestViewModel>();
 
@@ -28,14 +28,14 @@ namespace person_wpf_demo_tests
         [Test]
         public void Navigate_to_passes_parameters_to_receiver_view_model()
         {
-            var expectedParameter = "param";
-            var receiverViewModel = new ReceiverViewModel();
-            var factoryMock = new Mock<Func<Type, BaseViewModel>>();
+            string expectedParameter = "param";
+            ReceiverViewModel receiverViewModel = new ReceiverViewModel();
+            Mock<Func<Type, BaseViewModel>> factoryMock = new Mock<Func<Type, BaseViewModel>>();
             factoryMock
                 .Setup(factory => factory.Invoke(typeof(ReceiverViewModel)))
                 .Returns(receiverViewModel);
 
-            var navigationService = new NavigationService(factoryMock.Object);
+            NavigationService navigationService = new NavigationService(factoryMock.Object);
 
             navigationService.NavigateTo<ReceiverViewModel>(expectedParameter);
 

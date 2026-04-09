@@ -31,7 +31,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Persons_returns_items_from_person_service()
         {
-            var persons = new List<Person>
+            List<Person> persons = new List<Person>
             {
                 new Person { Id = 1, FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1), Addresses = new List<Address>() },
                 new Person { Id = 2, FirstName = "Jane", LastName = "Doe", BirthDate = new DateTime(1992, 2, 2), Addresses = new List<Address>() }
@@ -41,7 +41,7 @@ namespace person_wpf_demo_tests
                 .Setup(service => service.FindAll())
                 .Returns(persons);
 
-            var result = _viewModel.Persons;
+            IEnumerable<Person> result = _viewModel.Persons;
 
             Assert.That(result.Count, Is.EqualTo(2));
             Assert.That(result.First().Id, Is.EqualTo(1));
@@ -51,7 +51,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Delete_with_selected_person_calls_remove()
         {
-            var selectedPerson = new Person { Id = 10, FirstName = "John", LastName = "Doe", Addresses = new List<Address>() };
+            Person selectedPerson = new Person { Id = 10, FirstName = "John", LastName = "Doe", Addresses = new List<Address>() };
             _viewModel.SelectedPerson = selectedPerson;
 
             _viewModel.DeleteCommand.Execute(null);
@@ -64,7 +64,7 @@ namespace person_wpf_demo_tests
         {
             _viewModel.SelectedPerson = null!;
 
-            var canExecute = _viewModel.DeleteCommand.CanExecute(null);
+            bool canExecute = _viewModel.DeleteCommand.CanExecute(null);
 
             Assert.That(canExecute, Is.False);
         }
@@ -72,7 +72,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Navigate_to_new_address_with_selected_person_calls_navigation_service_with_person_parameter()
         {
-            var selectedPerson = new Person { Id = 20, FirstName = "John", LastName = "Doe", Addresses = new List<Address>() };
+            Person selectedPerson = new Person { Id = 20, FirstName = "John", LastName = "Doe", Addresses = new List<Address>() };
             _viewModel.SelectedPerson = selectedPerson;
 
             _viewModel.NavigateToNewAddressViewCommand.Execute(null);
